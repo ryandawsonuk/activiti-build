@@ -108,10 +108,12 @@ pipeline {
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
-            sh "updatebot push"
-            sh "updatebot update"
+            //sh "updatebot push"
+            //sh "updatebot update"
 
-            //sh "updatebot push-version --kind maven org.activiti.build:activiti-parent \$(cat VERSION)"
+            sh "echo pushing with update using version \$(cat VERSION)"
+
+            sh "updatebot push-version --kind maven org.activiti.build:activiti-parent \$(cat VERSION)"
 
         //    sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
           }
