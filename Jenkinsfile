@@ -83,12 +83,12 @@ pipeline {
         steps {
           container('maven') {
             // ensure we're not on a detached head
-            sh "git checkout $TAG"
+            sh "git checkout $TAG_NAME"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
-            sh "echo \$TAG > VERSION"
+            sh "echo \$TAG_NAME > VERSION"
             //sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
             //sh "git add --all"
             //sh "git commit -m 'release \$(cat VERSION)' --allow-empty"
