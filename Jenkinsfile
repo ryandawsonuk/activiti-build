@@ -78,23 +78,22 @@ pipeline {
       }
       stage('Build Release from Tag') {
         when {
-          buildingTag()
-          //tag '*RELEASE'
+          tag '*RELEASE'
         }
         steps {
           container('maven') {
             // ensure we're not on a detached head
-            sh "git checkout develop"
+            sh "git checkout $TAG"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
             // so we can retrieve the version in later steps
-            sh "echo \$(jx-release-version) > VERSION"
-            sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
-            sh "git add --all"
-            sh "git commit -m 'release \$(cat VERSION)' --allow-empty"
-            sh "git tag -fa v\$(cat VERSION) -m 'Release version \$(cat VERSION)'"
-            sh "git push origin v\$(cat VERSION)"
+            sh "echo \$TAG > VERSION"
+            //sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
+            //sh "git add --all"
+            //sh "git commit -m 'release \$(cat VERSION)' --allow-empty"
+            //sh "git tag -fa v\$(cat VERSION) -m 'Release version \$(cat VERSION)'"
+            //sh "git push origin v\$(cat VERSION)"
           }
           // dir ('./charts/activiti-build') {
           //   container('maven') {
