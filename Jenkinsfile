@@ -78,7 +78,7 @@ pipeline {
       }
       stage('Build Release from Tag') {
         when {
-          branch '*RELEASE'
+          tag '*RELEASE'
         }
         steps {
           container('maven') {
