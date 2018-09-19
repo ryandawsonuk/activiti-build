@@ -101,7 +101,9 @@ pipeline {
           //   }
           // }
           container('maven') {
-            sh 'mvn clean deploy -P central,\!alfresco,'
+            sh '''
+              mvn clean deploy -Pcentral -pl \'!alfresco'
+              '''
 
             sh 'export VERSION=`cat VERSION`'// && skaffold build -f skaffold.yaml'
 
